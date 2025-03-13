@@ -13,9 +13,9 @@ window.addEventListener("DOMContentLoaded", e => {
         fetch("http://localhost:5000/user/generateToken", tmpReq)
             .then(response => response.json())
             .then(message => {
-                    // console.log(message);
-                    // console.log(typeof(message));
+                    console.log(message);
                     display.innerText = message;
+                    sessionStorage.setItem("personalToken", message);   // salva il token nello storage della sessione
                 })
             .catch(e => console.error(e.message))
     })
@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", e => {
     authButton.addEventListener("click", e => {
         console.log(`You clicked on \"${e.target.innerText}\"`);
 
-        const token = document.getElementById("display").innerText;
+        const token = sessionStorage.getItem("personalToken");   // recupera il token dallo storage
         const tmpReq = {
             method: "GET",
             headers: {
