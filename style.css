@@ -27,3 +27,8 @@ li{
     font-size: 25px;
     margin: 10px;
 }
+p{
+    font-size: 10px;
+    font-style: italic;
+    margin-top: 0;
+}
