@@ -7,7 +7,7 @@ app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-dotenv.config();        // importa la configurazione del file .env inn un oggetto chiamato "process"
+dotenv.config();        // importa la configurazione del file .env in un oggetto chiamato "process"
 
 let PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
@@ -22,8 +22,7 @@ app.post("/user/generateToken", (req, res) => {
         }
 
         const token = jwt.sign(data, jwtSecretKey);
-        // console.log(token);
-        // console.log(typeof(token));
+        console.log(token);
         
         res.send(JSON.stringify(token));
 })
@@ -36,6 +35,7 @@ app.get("/user/validateToken", (req, res) => {
 
     try {
         const token = req.header(tokenHeaderKey);   // recupera il token dall'header
+        // console.log(JSON.stringify(req.headers));
 
         const verified = jwt.verify(token, jwtSecretKey);
         if (verified) {
@@ -45,7 +45,6 @@ app.get("/user/validateToken", (req, res) => {
             return res.status(401).send(error);
         }
     } catch (error) {
-        // accesso negato
         return res.status(401).send(error);
     }
 })
